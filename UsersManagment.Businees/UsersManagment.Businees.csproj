@@ -8,7 +8,13 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Models\" />
+    <Folder Include="Mappers\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UsersManagment.Core\UsersManagment.Core.csproj" />
+    <ProjectReference Include="..\UsersManagment.Infostructure\UsersManagment.Infostructure.csproj" />
   </ItemGroup>
 
 </Project>
