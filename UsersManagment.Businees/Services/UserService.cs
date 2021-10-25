@@ -24,17 +24,15 @@ namespace UsersManagment.Businees.Services
     
         private readonly TokenSetting _tokenSettings;
         private readonly IMapper _mapper;
-        private readonly TokenHelper _tokenHelper;
+        TokenHelper _tokenHelper = new TokenHelper();
         public UserService(IUserRepository userRepository,
-                           IMapper mapper,
-                           TokenHelper tokenHelper,
-                           IOptions<TokenSetting> tokenSettings
+                           IMapper mapper         
             )
         {
             this._userRepository = userRepository;
             this._mapper = mapper;
-            this._tokenHelper = tokenHelper;
-            this._tokenSettings = tokenSettings.Value;
+       
+           
             ////////////////////////
         }
         public async Task<LoginTokenModel> Login(UserLoginModel userLoginModel)

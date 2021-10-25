@@ -13,11 +13,12 @@ namespace UsersManagment.Businees.Helpers
 {
     public class TokenHelper
     {
-        private readonly TokenSetting _tokenSettings;
+        TokenSetting _tokenSettings = new TokenSetting();
 
-        public TokenHelper(TokenSetting tokenSettings)
+        public TokenHelper()
         {
-            _tokenSettings = tokenSettings;
+            _tokenSettings.Secret = "B4 yerd@ b1zn1n6 t0ken j0yl@sh6@n b4l@d1, @lb@tt@";
+            _tokenSettings.ExpiresInDays = 31;
         }
         public LoginTokenModel CreateToken(UserModel userModel)
         {
@@ -41,7 +42,7 @@ namespace UsersManagment.Businees.Helpers
             {
                 Token = tokenHandler.WriteToken(token),
                 Expiration = token.ValidTo,
-                IsActive = userModel.IsActive
+                IsActive = !userModel.IsActive
             };
 
             return model;

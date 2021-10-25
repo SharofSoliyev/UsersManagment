@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Http;
 using UsersManagment.Infostructure.Repository;
 using UsersManagment.Businees.Services;
 using UsersManagment.Businees.Mappers;
+using Microsoft.Extensions.Options;
+using UsersManagment.Businees.Helpers;
 
 namespace UsersManagment
 {
@@ -79,13 +81,15 @@ namespace UsersManagment
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUserRepository, UserRepository>();
 
-           
+
             // Business Layer
             services.AddScoped<IUserService, UserService>();
+      
             services.AddSingleton<IServiceCollection>(services);
-
+           
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(IEMapper));
+
 
             services.AddRouting(options => options.LowercaseUrls = true);
         }
