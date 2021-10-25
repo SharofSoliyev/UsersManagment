@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
+using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +19,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
+using UsersManagment.Infostructure.Repository;
+using UsersManagment.Businees.Services;
+using UsersManagment.Businees.Mappers;
 
 namespace UsersManagment
 {
@@ -72,7 +76,18 @@ namespace UsersManagment
         public static void ConfigureUserManagmentServices(IServiceCollection services, IConfiguration Configuration)
         {
             ConfigureDatabases(services, Configuration);
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
 
+           
+            // Business Layer
+            services.AddScoped<IUserService, UserService>();
+            services.AddSingleton<IServiceCollection>(services);
+
+            services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(IEMapper));
+
+            services.AddRouting(options => options.LowercaseUrls = true);
         }
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
